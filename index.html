@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vamos conversar · Respire Design</title>
+<style>
+:root{--accent:#7BF9DF;--accent-dark:#3dd4b8;--bg:#EEEEE8;--surface:#fff;--surface2:#F4F4EF;--dark:#111;--muted:#6f6f6b;--border:rgba(0,0,0,.09);--font:-apple-system,'SF Pro Display',system-ui,'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--dark);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow:hidden}
+body{display:flex;flex-direction:column}
+.hd{background:var(--surface);border-bottom:1.5px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.logo{width:34px;height:34px;border-radius:9px;background:#fff;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center}
+.hd .lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hd .ttl{font-size:14px;font-weight:700;letter-spacing:-.02em;margin-top:1px}
+.hd .meta{flex:1}.hd .step{font-size:11px;font-weight:700;color:var(--muted)}
+.prog{height:3px;background:var(--surface2);flex-shrink:0}.prog>i{display:block;height:100%;background:var(--accent);width:0;transition:width .45s cubic-bezier(.16,1,.3,1)}
+.viewport{flex:1;position:relative;overflow:hidden}
+.screen{position:absolute;inset:0;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;padding:32px max(22px,env(safe-area-inset-left)) 40px;background:var(--bg)}
+.screen::-webkit-scrollbar{display:none}
+.inner{max-width:560px;width:100%;margin:0 auto}
+.screen.in{animation:inn .42s cubic-bezier(.16,1,.3,1) both}
+@keyframes inn{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.screen.in{animation:none}}
+.qnum{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1f9d86;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.qnum .ln{width:20px;height:1.5px;background:#1f9d86;opacity:.4}
+h1.q{font-size:clamp(28px,6.4vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:10px;text-wrap:balance}
+.q-sub{font-size:16px;color:var(--muted);line-height:1.5;margin-bottom:26px}
+.field{margin-bottom:18px}
+label.fl{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:9px}
+input[type=text],input[type=email],input[type=tel],textarea{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:14px;padding:15px 16px;font-size:16px;font-family:var(--font);color:var(--dark);outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+textarea{resize:vertical;min-height:110px}
+input:focus,textarea:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px #7BF9DF33}
+.err{font-size:12px;color:#b3261e;margin-top:7px;min-height:0}
+.opts{display:grid;gap:10px}
+.opt{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:16px 18px;cursor:pointer;text-align:left;font:inherit;color:var(--dark);transition:all .15s;display:flex;flex-direction:column;gap:3px;-webkit-tap-highlight-color:transparent}
+.opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.opt.on{border:2px solid var(--accent);background:#7BF9DF14;padding:15.5px 17.5px}
+.opt b{font-size:16px;letter-spacing:-.02em}.opt span{font-size:13px;color:var(--muted);line-height:1.4}
+.consent{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;cursor:pointer}
+.consent input{width:20px;height:20px;accent-color:#1f9d86;flex-shrink:0;margin-top:1px}
+.consent span{font-size:14px;line-height:1.45}
+.foot{flex-shrink:0;background:var(--surface);border-top:1.5px solid var(--border);padding:14px max(22px,env(safe-area-inset-left)) max(14px,env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center;gap:10px}
+.btn{background:var(--accent);color:var(--dark);border:none;padding:14px 28px;font-size:15px;font-weight:700;letter-spacing:-.02em;border-radius:980px;cursor:pointer;box-shadow:0 2px 12px #7BF9DF55;transition:all .2s;font-family:var(--font);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{background:var(--accent-dark);transform:scale(1.02)}.btn:active{transform:scale(.97)}
+.btn.ghost{background:#fff;color:var(--muted);border:1.5px solid var(--border);box-shadow:none;font-weight:500}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;transform:none}
+.hint{font-size:11px;color:var(--muted);flex:1;text-align:right}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.done-card{background:var(--dark);border-radius:24px;padding:32px 26px;margin-bottom:18px;position:relative;overflow:hidden}
+.done-card::after{content:"";position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#7BF9DF33,transparent 70%)}
+.done-card h2{color:#fff;font-size:clamp(26px,6vw,34px);letter-spacing:-.03em;line-height:1.1;position:relative}
+.done-card p{color:rgba(255,255,255,.66);font-size:15px;line-height:1.55;margin-top:12px;position:relative}
+.small{font-size:13px;color:var(--muted);line-height:1.5;margin-top:14px}
+.wa{width:100%;justify-content:center;padding:17px 28px;font-size:16px}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="logo"><svg width="24" height="24" viewBox="84 84 146 146" xmlns="http://www.w3.org/2000/svg">      <path fill="#7BF9DF" d="M156.98,84.02c-40.29,0-72.95,32.66-72.95,72.95s32.66,72.95,72.95,72.95,72.95-32.66,72.95-72.95-32.66-72.95-72.95-72.95ZM192.95,205.33c-14.02,0-25.43-11.41-25.43-25.43,0-1.46.13-2.89.37-4.29,3.63,1.85,7.73,2.91,12.07,2.91,14.67,0,26.6-11.93,26.6-26.59s-11.39-26.05-25.6-26.57c-.06,0-.12,0-.18,0-.08,0-.17,0-.25,0-.19,0-.38,0-.57,0-8.25,0-15.63,3.77-20.51,9.69-.08.1-.16.2-.25.31-.05.06-.1.13-.15.19-1.51,1.92-2.76,4.05-3.7,6.34-1.28,3.11-1.98,6.51-1.98,10.07h0c0,8.27,3.8,15.67,9.74,20.55-.59,2.37-.91,4.85-.91,7.41,0,16.78,13.65,30.43,30.44,30.43,2.55,0,5.03-.32,7.4-.92-11.71,9.63-26.71,15.41-43.06,15.41s-31.34-5.78-43.06-15.41c2.37.6,4.85.92,7.4.92,16.79,0,30.44-13.65,30.44-30.43,0-2.56-.32-5.05-.92-7.42,1.36-1.12,2.62-2.37,3.74-3.74-2.28-3.42-3.88-7.33-4.61-11.54-13.42-3.17-23.44-15.25-23.44-29.61,0-.4.02-.79.03-1.19-5.19,1.51-9.73,4.57-13.09,8.63-.08.1-.17.21-.25.31-.05.06-.1.13-.15.19-1.51,1.92-2.76,4.04-3.69,6.34-1.28,3.11-1.99,6.5-1.99,10.07,0,7.33,2.99,13.98,7.8,18.79,1.61,1.61,3.43,3.01,5.4,4.17v17.23c-1.22.15-2.16,1.19-2.16,2.45,0,1.37,1.11,2.48,2.48,2.48h11.25c1.37,0,2.48-1.11,2.48-2.48,0-1.26-.94-2.3-2.16-2.45v-13.64c.5.03,1.01.05,1.52.05,4.35,0,8.45-1.06,12.07-2.91.24,1.4.37,2.83.37,4.29,0,14.02-11.41,25.43-25.43,25.43-7.5,0-14.23-3.27-18.89-8.45-8.16-11.2-12.98-24.99-12.98-39.91,0-37.47,30.37-67.84,67.84-67.84s67.84,30.37,67.84,67.84c0,14.92-4.82,28.71-12.98,39.91-4.66,5.18-11.4,8.45-18.89,8.45ZM130.48,178.28v13.81h-7.89v-16.15c2.45,1.17,5.1,1.96,7.89,2.33Z"/>
+      <path fill="#7BF9DF" d="M157.97,101c-.06,0-.12,0-.18,0-.08,0-.17,0-.25,0-.19,0-.38,0-.57,0-8.25,0-15.63,3.77-20.51,9.69-.08.1-.16.2-.25.31-.05.06-.1.13-.15.19-1.51,1.92-2.76,4.05-3.7,6.34-1.28,3.11-1.98,6.51-1.98,10.07h0c0,12.08,8.11,22.3,19.16,25.53-.02-.37-.03-.74-.03-1.12v-.06c0-4.08.81-7.97,2.27-11.52.76-1.86,1.7-3.63,2.81-5.28.45-.68.92-1.33,1.42-1.97.06-.07.12-.15.18-.22.09-.12.19-.24.28-.35,5.58-6.77,14.04-11.09,23.48-11.09.22,0,.44,0,.65.01.1,0,.19,0,.29,0,.06,0,.13,0,.2,0,.61.03,1.2.06,1.8.12-2.63-11.5-12.74-20.19-24.92-20.64Z"/></svg></div>
+  <div class="meta"><div class="lbl">Respire Design</div><div class="ttl" id="ttl">Vamos conversar</div></div>
+  <div class="step" id="stepNum"></div>
+</header>
+<div class="prog"><i id="pf"></i></div>
+<div class="viewport" id="vp"></div>
+<div class="foot" id="foot">
+  <button class="btn ghost" id="bBack" type="button">Voltar</button>
+  <span class="hint" id="hint"></span>
+  <button class="btn" id="bNext" type="button">Continuar</button>
+</div>
+<script>
+/* ===== CONFIGURAÇÃO ===== */
+const CONFIG = {
+  ENDPOINT: "https://hook.us2.make.com/lj35i2bqimn6chdxkgy0g8kg2ryil8zf", // webhook do Make. Vazio = modo teste, nada é enviado.
+  WHATSAPP: "5516992349201", // número do estúdio com DDI e DDD, só dígitos
+  ORIGEM: "Site"
+};
+/* ======================== */
+const NEEDS=[
+ {v:"Marca nova",s:"Estou criando ou lançando uma marca"},
+ {v:"Atualizar a marca",s:"Já tenho marca e quero renovar ou reposicionar"},
+ {v:"Embalagem",s:"Rótulo, caixa ou linha de produtos"},
+ {v:"Campanha ou comunicação",s:"Lançamento, coleção, peças para divulgar"},
+ {v:"Ainda não sei",s:"Prefiro explicar na conversa"}
+];
+const MOMENTS=[
+ {v:"Lançamento",s:"A marca está nascendo"},
+ {v:"Rebrand",s:"A marca precisa mudar de fase"},
+ {v:"Crescimento",s:"O negócio cresceu e a marca ficou para trás"},
+ {v:"Outro momento",s:"Conto na conversa"}
+];
+const D={nome:"",marca:"",whatsapp:"",email:"",need:"",momento:"",msg:"",consent:false,news:false,hp:""};
+const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SCREENS=[
+ {t:"Vamos conversar",render:()=>`<div class="inner"><div class="qnum"><span class="ln"></span>Respire Design</div>
+  <h1 class="q">Conte rapidamente sobre a sua marca.</h1>
+  <p class="q-sub">São 5 perguntas curtas, menos de 2 minutos. Depois eu continuo a conversa com você por e-mail e WhatsApp.</p></div>`,intro:true},
+ {t:"Quem é você",render:()=>`<div class="inner"><div class="qnum"><span class="ln"></span>1 de 5</div>
+  <h1 class="q">Como posso te chamar?</h1><p class="q-sub">E qual é a marca ou empresa.</p>
+  <div class="field"><label class="fl">Seu nome</label><input type="text" id="f_nome" autocomplete="name" value="${esc(D.nome)}" placeholder="Nome e sobrenome"></div>
+  <div class="field"><label class="fl">Marca ou empresa</label><input type="text" id="f_marca" autocomplete="organization" value="${esc(D.marca)}" placeholder="Ex.: nome da marca, ou 'ainda sem nome'"></div>
+  <div class="err" id="err"></div></div>`,
+  check(){D.nome=v("f_nome");D.marca=v("f_marca");if(D.nome.length<2)return"Preciso do seu nome.";if(!D.marca)return"Conte o nome da marca, ou escreva 'ainda sem nome'.";}},
+ {t:"Contato",render:()=>`<div class="inner"><div class="qnum"><span class="ln"></span>2 de 5</div>
+  <h1 class="q">Onde falo com você?</h1><p class="q-sub">Vou responder por e-mail e pelo WhatsApp.</p>
+  <div class="field"><label class="fl">WhatsApp</label><input type="tel" id="f_wa" inputmode="tel" autocomplete="tel" value="${esc(D.whatsapp)}" placeholder="(16) 99999-9999"></div>
+  <div class="field"><label class="fl">E-mail</label><input type="email" id="f_mail" inputmode="email" autocomplete="email" value="${esc(D.email)}" placeholder="voce@suamarca.com.br"></div>
+  <label class="consent"><input type="checkbox" id="f_ok" ${D.consent?"checked":""}><span>Aceito receber contato da Respire Design por e-mail e WhatsApp sobre este orçamento.</span></label>
+  <label class="consent" style="margin-top:10px"><input type="checkbox" id="f_news" ${D.news?"checked":""}><span>Quero também receber novidades e cases da Respire por e-mail. <i style="color:var(--muted)">(opcional)</i></span></label>
+  <div class="err" id="err"></div></div>`,
+  check(){D.whatsapp=v("f_wa");D.email=v("f_mail");D.consent=document.getElementById("f_ok").checked;D.news=document.getElementById("f_news").checked;
+   const d=D.whatsapp.replace(/\D/g,"");if(d.length<10||d.length>13)return"Confira o WhatsApp, com DDD.";
+   if(!/^\S+@\S+\.\S+$/.test(D.email))return"Confira o e-mail.";
+   if(!D.consent)return"Marque a caixa para eu poder te responder.";}},
+ {t:"O que você precisa",render:()=>`<div class="inner"><div class="qnum"><span class="ln"></span>3 de 5</div>
+  <h1 class="q">O que você precisa agora?</h1><p class="q-sub">Escolha o que mais se aproxima.</p>
+  <div class="opts">${NEEDS.map(o=>opt(o,D.need)).join("")}</div><div class="err" id="err"></div></div>`,
+  bind:"need",check(){if(!D.need)return"Escolha uma opção.";}},
+ {t:"Momento da marca",render:()=>`<div class="inner"><div class="qnum"><span class="ln"></span>4 de 5</div>
+  <h1 class="q">Em que momento a marca está?</h1><p class="q-sub">Isso me ajuda a entender o tamanho do desafio.</p>
+  <div class="opts">${MOMENTS.map(o=>opt(o,D.momento)).join("")}</div><div class="err" id="err"></div></div>`,
+  bind:"momento",check(){if(!D.momento)return"Escolha uma opção.";}},
+ {t:"Quer contar mais?",render:()=>`<div class="inner"><div class="qnum"><span class="ln"></span>5 de 5</div>
+  <h1 class="q">Quer contar mais alguma coisa?</h1><p class="q-sub">Opcional. Pode ser o produto, um prazo, uma referência, ou só uma dúvida.</p>
+  <div class="field"><textarea id="f_msg" placeholder="Escreva do seu jeito">${esc(D.msg)}</textarea></div>
+  <input class="hp" id="f_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <div class="err" id="err"></div></div>`,
+  check(){D.msg=v("f_msg");D.hp=v("f_hp");},last:true},
+ {t:"Recebido",final:true,render:()=>{const name=esc(D.nome.split(" ")[0]);
+  return`<div class="inner"><div class="done-card"><h2>Obrigado, ${name}. Recebi.</h2>
+  <p>Vou te enviar uma confirmação em ${esc(D.email)}. Para adiantar, continue pelo WhatsApp: lá eu faço as próximas perguntas e monto o orçamento com você.</p></div>
+  <a class="btn wa" id="wa" href="${waLink()}" target="_blank" rel="noopener">Continuar no WhatsApp</a>
+  <p class="small" id="status"></p></div>`}}
+];
+function v(id){const e=document.getElementById(id);return e?e.value.trim():"";}
+function opt(o,cur){return`<button type="button" class="opt ${cur===o.v?"on":""}" data-v="${esc(o.v)}"><b>${esc(o.v)}</b><span>${esc(o.s)}</span></button>`}
+function digits(){let d=D.whatsapp.replace(/\D/g,"");if(d.length<=11)d="55"+d;return d;}
+function waLink(){const t=`Oi, aqui é ${D.nome}${D.marca?" da "+D.marca:""}. Acabei de preencher o formulário no site. Preciso de: ${D.need}. Momento da marca: ${D.momento}.`;
+  return"https://wa.me/"+CONFIG.WHATSAPP+"?text="+encodeURIComponent(t);}
+let i=0,busy=false;
+const vp=document.getElementById("vp"),bN=document.getElementById("bNext"),bB=document.getElementById("bBack"),hint=document.getElementById("hint");
+function paint(){const s=SCREENS[i];vp.innerHTML=`<div class="screen in">${s.render()}</div>`;
+  document.getElementById("ttl").textContent=s.t;
+  const total=SCREENS.length-2;document.getElementById("stepNum").textContent=(i>0&&!s.final)?i+" / "+total:"";
+  document.getElementById("pf").style.width=(s.final?100:(i/(SCREENS.length-1))*100)+"%";
+  document.getElementById("foot").style.display=s.final?"none":"flex";
+  bB.style.visibility=i===0?"hidden":"visible";
+  bN.textContent=s.intro?"Começar":s.last?"Enviar":"Continuar";
+  hint.textContent=s.intro?"":"Enter para avançar";
+  if(s.bind)vp.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{D[s.bind]=b.dataset.v;vp.querySelectorAll(".opt").forEach(x=>x.classList.toggle("on",x===b));
+    setTimeout(()=>next(),230);});
+  const f=vp.querySelector("input[type=text],input[type=tel],textarea");if(f&&!s.intro&&window.innerWidth>700)f.focus();
+  if(s.final)send();
+}
+vp.addEventListener("input",()=>showErr(""));vp.addEventListener("change",()=>showErr(""));
+function showErr(m){const e=document.getElementById("err");if(e)e.textContent=m||"";}
+function next(){if(busy)return;const s=SCREENS[i];if(s.check){const m=s.check();if(m){showErr(m);return;}}
+  if(i<SCREENS.length-1){i++;paint();}}
+bN.onclick=next;bB.onclick=()=>{if(i>0){i--;paint();}};
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&e.target.tagName!=="TEXTAREA"&&!SCREENS[i].final){e.preventDefault();next();}});
+async function send(){
+  const st=()=>document.getElementById("status");
+  if(D.hp)return; // robô
+  const payload={nome:D.nome,marca:D.marca,whatsapp:"+"+digits(),email:D.email,necessidade:D.need,momento:D.momento,mensagem:D.msg,
+    consentimento:"sim",newsletter:D.news?"sim":"nao",origem:CONFIG.ORIGEM,data:new Date().toISOString(),pagina:location.href};
+  if(!CONFIG.ENDPOINT){console.log("modo teste, payload:",payload);return;}
+  try{const r=await fetch(CONFIG.ENDPOINT,{method:"POST",body:new URLSearchParams(payload)});
+    if(!r.ok)throw new Error(r.status);}
+  catch(e){if(st())st().textContent="Não consegui registrar o envio por aqui, mas pode seguir pelo WhatsApp que eu recebo a sua mensagem lá.";}
+}
+paint();
+</script>
+</body>
+</html>
